@@ -1,19 +1,97 @@
-// ----------------------------------------------------------------------------
-// Reemplaza bucles usando recursión
-// ----------------------------------------------------------------------------
+// ****************************************************************************
+// Use Recursion to Create a Range of Numbers
+// ****************************************************************************
+function rangeOfNumbers(startNum, endNum) {
+  // if (endNum < startNum) {
+  //   return [];
+  // } else {
+  //   const numbers = rangeOfNumbers(startNum, endNum - 1);
+  //   numbers.push(endNum);
+  //   return numbers;
+  // }
+  if (endNum < startNum) return [];
+
+  const numbers = rangeOfNumbers(startNum, endNum - 1);
+  numbers.push(endNum);
+  return numbers;
+}
+console.log(rangeOfNumbers(4, 9));
+console.log(`Alex que mariquera, estas aprendiendo`);
+
 /*
-Tenemos un arreglo de objetos que representan a diferentes personas en nuestras listas de contactos.
+// ****************************************************************************
+// Utiliza recursión para crear una cuenta regresiva
+// ****************************************************************************
 
-Una función lookUpProfile que recibe nombre (name) y una propiedad (prop) como argumentos preescritos para ti.
+// Cambia solo el código debajo de esta línea
+function countdown(n) {
+  if (n < 1) return [];
+  const countArray = countdown(n - 1);
+  countArray.unshift(n);
+  return countArray;
+}
+console.log(countdown(10));
+// Cambia solo el código encima de esta línea
 
-La función debe verificar si el nombre (name) es el nombre de pila del contacto (firstName) y la propiedad (prop) dada es una propiedad de ese contacto.
+// ****************************************************************************
+// Usa múltiples operadores condicionales (ternarios)
+// ****************************************************************************
+function checkSign(num) {
+  return num > 0 ? "positive" : num < 0 ? "negative" : "zero";
+}
 
-Si ambos son verdaderos, entonces devolver el "valor" de esa propiedad.
+console.log(checkSign(10));
+console.log(checkSign(0));
+console.log(checkSign(-10));
 
-Si name no corresponde a ningún contacto, entonces devuelve la cadena No such contact.
+// ****************************************************************************
+// Usa el operador condicional (ternario)
+// ****************************************************************************
+function checkEqual(a, b) {
+  return (a === b) ? "Equal" : "Not Equal";
+}
 
-Si prop no corresponde a ninguna propiedad válida de un contacto encontrado que coincida con name entonces devuelve la cadena No such property.
-*/
+checkEqual(1, 2);
+
+// ****************************************************************************
+// Utiliza la función "parseInt" con Radix (Base)
+// ****************************************************************************
+function convertToInteger(str) {
+  return parseInt(str, 2);
+}
+console.log(`convertToInteger("10011"): `, convertToInteger("10011"));
+
+function convertNumToAnyBase(num, base) {
+  return num.toString(base);
+}
+console.log(`convertNumToAnyBase(243,16):`, convertNumToAnyBase(243, 16));
+
+// ****************************************************************************
+// Generate Random Whole Numbers within a Range
+// ****************************************************************************
+function randomRange(myMin, myMax) {
+  // Only change code below this line
+  return myMin + Math.floor(Math.random() * (myMax - myMin + 1));
+  // Only change code above this line
+}
+console.log(randomRange(20, 22));
+
+// ****************************************************************************
+// Profile Lookup
+// ****************************************************************************
+
+// Tenemos un arreglo de objetos que representan a diferentes personas en nuestras listas de contactos.
+
+// Una función lookUpProfile que recibe nombre (name) y una propiedad (prop) como argumentos preescritos para ti.
+
+// La función debe verificar si el nombre (name) es el nombre de pila del contacto (firstName) y la propiedad (prop) dada es una propiedad de ese contacto.
+
+// Si ambos son verdaderos, entonces devolver el "valor" de esa propiedad.
+
+// Si name no corresponde a ningún contacto, entonces devuelve la cadena No such contact.
+
+// Si prop no corresponde a ninguna propiedad válida de un contacto encontrado que coincida con name entonces devuelve la cadena No such property.
+
 // Configuración
 const contacts = [
   {
@@ -45,17 +123,32 @@ const contacts = [
 function lookUpProfile(name, prop) {
   // Cambia solo el código debajo de esta línea
   for (let contact = 0; contact <= contacts.length - 1; contact++) {
-    // console.log(contacts[contact]);
     if (name === contacts[contact].firstName) {
-      console.log(contacts[contact], `nombre de pila del contacto`);
+      if (contacts[contact].hasOwnProperty(prop)) {
+        return contacts[contact][prop];
+      } else {
+        return "No such property";
+      }
     }
   }
+  return "No such contact";
   // Cambia solo el código encima de esta línea
 }
+console.log(`---- console.log(lookUpProfile("Akira", "likes"));`);
+console.log(lookUpProfile("Akira", "likes"));
 
-lookUpProfile("Akira", "likes");
+console.log(`---- console.log(lookUpProfile("Bob", "number"));`);
+console.log(lookUpProfile("Bob", "number"));
 
-/*
+console.log(`---- console.log(lookUpProfile("Bob", "potato"));`);
+console.log(lookUpProfile("Bob", "potato"));
+
+console.log(`---- console.log(lookUpProfile("Akira", "address"));`);
+console.log(lookUpProfile("Akira", "address"));
+
+console.log(`---- lookUpProfile("Kristian", "lastName");`);
+console.log(lookUpProfile("Kristian", "lastName"));
+
 // ****************************************************************************
 // Reemplaza bucles usando recursión
 // ****************************************************************************
