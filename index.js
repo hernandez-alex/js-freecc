@@ -1,9 +1,148 @@
 "use strict";
 // ****************************************************************************
-// Set Default Parameters for Your Functions
+// Crea cadenas usando plantillas literales
 // ****************************************************************************
 
 /*
+// ****************************************************************************
+// Crea cadenas usando plantillas literales
+// ****************************************************************************
+const result = {
+  success: ["max-length", "no-amd", "prefer-arrow-functions"],
+  failure: ["no-var", "var-on-top", "linebreak"],
+  skipped: ["no-extra-semi", "no-dup-keys"],
+};
+function makeList(arr) {
+  // Cambia solo el código debajo de esta línea
+  const failureItems = [];
+  for (let i = 0; i < arr.length; i++) {
+    failureItems.push(`<li class="text-warning">${arr[i]}</li>`);
+  }
+  // Cambia solo el código encima de esta línea
+  return failureItems;
+}
+const failuresList = makeList(result.failure);
+console.log(failuresList);
+
+// ****************************************************************************
+// Utiliza desestructuración para pasar un objeto como parámetro de función
+// ****************************************************************************
+const stats = {
+  max: 56.78,
+  standard_deviation: 4.34,
+  median: 34.54,
+  mode: 23.87,
+  min: -0.75,
+  average: 35.85,
+};
+
+const half = ({ max, min }) => (max + min) / 2.0;
+// Cambia solo el código encima de esta línea
+console.log(half(stats));
+
+// ****************************************************************************
+// Destructuring via rest elements
+// ****************************************************************************
+function removeFirstTwo(list) {
+  // Only change code below this line
+  const [a, b, ...shorterList] = list; // Change this line
+  // Only change code above this line
+  return shorterList;
+}
+
+const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const sourceWithoutFirstTwo = removeFirstTwo(source);
+console.log(sourceWithoutFirstTwo);
+
+// ****************************************************************************
+// Use Destructuring Assignment to Assign Variables from Arrays
+// ****************************************************************************
+let a = 8, b = 6;
+// Only change code below this line
+[a, b] = [b, a];
+
+// ****************************************************************************
+// Use Destructuring Assignment to Extract Values from Objects
+// ****************************************************************************
+const LOCAL_FORECAST = {
+  yesterday: { low: 61, high: 75 },
+  today: { low: 64, high: 77 },
+  tomorrow: { low: 68, high: 80 },
+};
+
+// Only change code below this line
+// const lowToday = LOCAL_FORECAST.today.low;
+// const highToday = LOCAL_FORECAST.today.high;
+const {
+  today: { low: lowToday, high: highToday },
+} = LOCAL_FORECAST;
+// Only change code above this line
+
+// ****************************************************************************
+// Use Destructuring Assignment to Extract Values from Objects
+// ****************************************************************************
+const HIGH_TEMPERATURES = {
+  yesterday: 75,
+  today: 77,
+  tomorrow: 80,
+};
+
+// Only change code below this line
+
+// const highToday = HIGH_TEMPERATURES.today;
+// const highTomorrow = HIGH_TEMPERATURES.tomorrow;
+const { today: highToday, tomorrow: highTomorrow } = HIGH_TEMPERATURES;
+console.log(highToday, highTomorrow);
+// Only change code above this line
+
+// ****************************************************************************
+// Use Destructuring Assignment to Extract Values from Objects
+// ****************************************************************************
+const HIGH_TEMPERATURES = {
+  yesterday: 75,
+  today: 77,
+  tomorrow: 80,
+};
+
+// Only change code below this line
+// const today = HIGH_TEMPERATURES.today;
+// const tomorrow = HIGH_TEMPERATURES.tomorrow;
+const { today, tomorrow } = HIGH_TEMPERATURES;
+console.log(today, tomorrow);
+// Only change code above this line
+
+// ****************************************************************************
+// Use the Spread Operator to Evaluate Arrays In-Place
+// ****************************************************************************
+const arr1 = ["JAN", "FEB", "MAR", "APR", "MAY"];
+let arr2;
+
+arr2 = [...arr1]; // Change this line
+
+console.log(arr2);
+
+// ****************************************************************************
+// Use the Rest Parameter with Function Parameters
+// ****************************************************************************
+const sum = (...args) => {
+  let total = 0;
+  for (let i = 0; i + 1 <= args.length; i++) {
+    console.log(args[i]);
+    total += +args[i];
+  }
+  return total;
+};
+const sum2 = (x, y, z) => {
+  const args = [x, y, z];
+  let total = 0;
+  for (let i = 0; i < args.length; i++) {
+    total += args[i];
+  }
+  return total;
+};
+console.log(sum(2, 4, 8, 16));
+console.log(sum2(2, 4, 8));
+
 // ****************************************************************************
 // Set Default Parameters for Your Functions
 // ****************************************************************************
