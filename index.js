@@ -1,9 +1,36 @@
 "use strict";
 // ****************************************************************************
-// Crea cadenas usando plantillas literales
+// Write Concise Object Literal Declarations Using Object Property Shorthand
 // ****************************************************************************
 
 /*
+// ****************************************************************************
+// Write Concise Declarative Functions with ES6
+// ****************************************************************************
+// Cambia solo el código debajo de esta línea
+const bicycle = {
+  gear: 2,
+  setGear(newGear) {
+    this.gear = newGear;
+  }
+};
+// Cambia solo el código encima de esta línea
+bicycle.setGear(3);
+console.log(bicycle.gear);
+
+// ****************************************************************************
+// Write Concise Object Literal Declarations Using Object Property Shorthand
+// ****************************************************************************
+const createPerson = (name, age, gender) => {
+  // Cambia solo el código debajo de esta línea
+  return {
+    name,
+    age,
+    gender
+  };
+  // Cambia solo el código encima de esta línea
+};
+
 // ****************************************************************************
 // Crea cadenas usando plantillas literales
 // ****************************************************************************
