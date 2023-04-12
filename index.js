@@ -1,9 +1,46 @@
 "use strict";
-// ****************************************************************************
-// Write Concise Object Literal Declarations Using Object Property Shorthand
-// ****************************************************************************
-
 /*
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// ****************************************************************************
+// Use getters and setters to Control Access to an Object
+// ****************************************************************************
+// Only change code below this line
+class Thermostat {
+  constructor(farenheitTemp) {
+    this._celciusTemp = (5 / 9) * (farenheitTemp - 32);
+  }
+  // getter
+  get temperature() {
+    return this._celciusTemp;
+  }
+  // setter
+  set temperature(newTemp) {
+    this._celciusTemp = newTemp;
+  }
+}
+// Only change code above this line
+
+const thermos = new Thermostat(76); // Setting in Fahrenheit scale
+let temp = thermos.temperature; // 24.44 in Celsius
+thermos.temperature = 26;
+temp = thermos.temperature; // 26 in Celsius
+
+// ****************************************************************************
+// Use class Syntax to Define a Constructor Function
+// ****************************************************************************
+// Only change code below this line
+class Vegetable {
+  constructor(name) {
+    this.name = name;
+  }
+}
+// Only change code above this line
+
+const carrot = new Vegetable("carrot");
+console.log(carrot.name); // Should display 'carrot'
+
 // ****************************************************************************
 // Write Concise Declarative Functions with ES6
 // ****************************************************************************
@@ -12,7 +49,7 @@ const bicycle = {
   gear: 2,
   setGear(newGear) {
     this.gear = newGear;
-  }
+  },
 };
 // Cambia solo el código encima de esta línea
 bicycle.setGear(3);
