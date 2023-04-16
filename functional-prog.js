@@ -1,15 +1,57 @@
 "use strict";
+/*
+// ****************************************************************************
+// Introduction to Currying and Partial Application
+// ****************************************************************************
+function add(x) {
+  // Only change code below this line
+  return function(y){
+    return function(z){
+      return x+y+z
+    }
+  }
+
+  // Only change code above this line
+}
+
+add(10)(20)(30);
+
+// ****************************************************************************
+// Use the some Method to Check that Any Elements in an Array Meet a Criteria
+// ****************************************************************************
+function checkPositive(arr) {
+  // Only change code below this line
+  return arr.some((curValue) => curValue > 0)
+  // Only change code above this line
+}
+
+checkPositive([1, 2, 3, -4, 5]);
+
+// ****************************************************************************
+// Use the every Method to Check that Every Element in an Array Meets a Criteria
+// ****************************************************************************
+function checkPositive(arr) {
+  // Only change code below this line
+  return arr.every((curValue) => curValue > 0);
+  // Only change code above this line
+}
+
+checkPositive([1, 2, 3, -4, 5]);
+
 // ****************************************************************************
 // Apply Functional Programming to Convert Strings to URL Slugs
 // ****************************************************************************
-// Cambia solo el código debajo de esta línea
 function urlSlug(title) {
-  console.log(`r:`, title.trim().split(" ").join("-").toLowerCase());
+  // Only change code below this line
+  return title.toLowerCase().trim()
+    .split(/\s{1,}/)
+    .filter((item, index, arr)=> item !== " ")
+    .join("-")
+  // Only change code above this line
 }
-// Cambia solo el código encima de esta línea
-urlSlug("         A Mind Needs Books Like A Sword Needs A Whetstone");
-urlSlug(" Winter Is  Coming");
-/*
+urlSlug("A Mind Needs Books Like A Sword Needs A Whetstone");
+console.log(urlSlug(" Winter Is    Coming"))
+
 // ****************************************************************************
 // Combine an Array into a String Using the join Method
 // ****************************************************************************
