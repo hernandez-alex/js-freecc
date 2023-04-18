@@ -1,30 +1,166 @@
 "use strict";
 // ****************************************************************************
+// Smallest Common Multiple
+// ****************************************************************************
+function prime(num) {
+  if (num % 1 !== 0 || num < 2) return false;
+  let divisores = 0;
+  for (let i = 1; i <= num; i++) {
+    if (num % i === 0) divisores++;
+    if (divisores > 2) return false;
+  }
+  return true;
+}
+function primes(num) {
+  const primeNumbs = [];
+  for (let i = 1; i <= num; i++) {
+    if (prime(i)) primeNumbs.push(i);
+  }
+  return primeNumbs;
+}
+
+function smallestCommons(arr) {
+  const arrSort = arr.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+  const numbers = [];
+  for (let i = 0; i < arrSort[1] - arrSort[0] + 1; i++) {
+    numbers.push(i + arrSort[0]);
+  }
+  console.log("--- numbers", numbers); // delete after
+  const HighNumb = numbers[numbers.length - 1];
+  console.log("--- HighNumb", HighNumb); // delete after
+  const divisors = primes(HighNumb);
+  console.log("--- divisors", divisors); // delete after
+
+  //---
+  let matrixMCM = [];
+  for (let i = 0; i < numbers.length; i++) {
+    let value = numbers[i];
+    // console.log("--- originalValue", value); // delete after
+    const rowMCM = [];
+    for (let j = 0; j < divisors.length; j++) {
+      let count = 0;
+      // console.log("div:", divisors[j]); // delete after
+      while (value % divisors[j] === 0) {
+        count++;
+        value = value / divisors[j];
+      }
+      rowMCM.push(divisors[j] ** count);
+    }
+    console.log("--- rowMCM", numbers[i], rowMCM); // delete after
+    matrixMCM.push(rowMCM);
+  }
+  console.log("--- MatrixMCM", matrixMCM); // delete after
+  let valMCM = 1;
+  for (let i = 0; i < divisors.length; i++) {
+    let maxRow = 1;
+    for (let j = 0; j < matrixMCM.length; j++) {
+      if (matrixMCM[j][i] > maxRow) maxRow = matrixMCM[j][i];
+    }
+    valMCM = valMCM * maxRow;
+  }
+  console.log(valMCM);
+  //---
+
+  return "*** Aquí va la solucion ***";
+}
+
+console.log(smallestCommons([23, 18]));
+
+/*
+// ****************************************************************************
+// Sum All Primes
+// ****************************************************************************
+function prime(num) {
+  if (num % 1 !== 0 || num < 2) return false;
+  let divisores = 0;
+  for (let i = 1; i <= num; i++) {
+    if (num % i === 0) divisores++;
+    if (divisores > 2) return false;
+  }
+  return true;
+}
+// console.log(prime(3));
+// console.log("----------");
+function sumPrimes(num) {
+  const primeNumbs = [];
+  for (let i = 1; i <= num; i++) {
+    if (prime(i)) primeNumbs.push(i);
+  }
+  return primeNumbs.reduce((sum, num) => sum + num, 0);
+}
+console.log(sumPrimes(13));
+
+// ****************************************************************************
+// Sum All Odd Fibonacci Numbers
+// ****************************************************************************
+function sumFibs(num) {
+  const numFib = [0, 1];
+  while (numFib[numFib.length - 2] + numFib[numFib.length - 1] <= num) {
+    numFib.push(numFib[numFib.length - 2] + numFib[numFib.length - 1]);
+  }
+  return numFib.filter((el) => el % 2 !== 0).reduce((sum, el) => sum + el, 0);
+}
+console.log(sumFibs(1000));
+
+// ****************************************************************************
+// Convert HTML Entities
+// ****************************************************************************
+function convertHTML(str) {
+  const strArr = str.split("");
+  return strArr
+    .map((el) => {
+      return el === "&"
+        ? "&amp;"
+        : el === "<"
+        ? "&lt;"
+        : el === ">"
+        ? "&gt;"
+        : el === '"'
+        ? "&quot;"
+        : el === "'"
+        ? "&apos;"
+        : el;
+    })
+    .join("");
+}
+
+console.log(convertHTML("Dolce & Gabbana"));
+
+// ****************************************************************************
+// Sorted Union
+// ****************************************************************************
+function uniteUnique(...arr) {
+  const newArr = [];
+  // --- Solucion 1: Funcionando
+  // for (let i = 0; i < arr.length; i++) {
+  //   for (let j = 0; j < arr[i].length; j++) {
+  //     if (!newArr.includes(arr[i][j])) newArr.push(arr[i][j]);
+  //   }
+  // }
+
+  // --- Solucion 2:
+  arr.map((el) => {
+    el.map((item) => {
+      if (!newArr.includes(item)) newArr.push(item);
+    });
+  });
+  return newArr;
+}
+
+console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]));
+
+// ****************************************************************************
 // Missing letters
 // ****************************************************************************
 function fearNotLetter(str) {
-  const letters = "abcdefghijklmnopqrstuvwxyz";
+  const letters = "abcdefghijklmnopqrstuvwxyz".slice("abcdefghijklmnopqrstuvwxyz".indexOf(str[0]));
   if (str === letters) return undefined;
-  for (let i = 0; i < str.length; i++) {
-    console.log(i, str[i]);
+  for (let i = 0; i < letters.length; i++) {
+    if (!str.includes(letters[i])) return letters[i];
   }
 }
 
 console.log(fearNotLetter("abce"));
-console.log("---");
-console.log(fearNotLetter("abcdefghijklmnopqrstuvwxyz"));
-/*
-// ****************************************************************************
-// DNA Pairing
-// ****************************************************************************
-// AT CG
-function pairElement(str) {
-  return str.split("").map((el) => {
-    return el === "A" ? ["A", "T"] : el === "T" ? ["T", "A"] : el === "C" ? ["C", "G"] : ["G", "C"];
-  });
-}
-
-console.log(pairElement("GCG"));
 
 // ****************************************************************************
 // Search and Replace
