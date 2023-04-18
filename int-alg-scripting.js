@@ -1,8 +1,93 @@
 "use strict";
+/*
+// ****************************************************************************
+// Search and Replace
+// ****************************************************************************
+function myReplace(str, before, after) {
+  return str
+    .split(" ")
+    .map((word) => {
+      return word === before
+        ? /[A-Z]/.test(before[0])
+          ? after.slice(0, 1).toUpperCase().concat(after.slice(1))
+          : after.toLowerCase()
+        : word;
+    })
+    .join(" ");
+}
+
+console.log(myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped"));
+console.log(myReplace("Let us go to the store", "store", "mall"));
+console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting"));
+
+// ****************************************************************************
+// Pig Latin
+// ****************************************************************************
+function translatePigLatin(str) {
+  const strLC = str.toLowerCase().split("");
+  // Starts with a vowel
+  if (/[aeiou]/.test(strLC[0])) {
+    return strLC.join("").concat("way");
+  }
+  // Begin with one or more vowels
+  for (let i = 0; strLC.length; i++) {
+    if (/[aeiou]/.test(strLC[i])) {
+      return strLC
+        .join("")
+        .slice(i, strLC.length + 1)
+        .concat(str.slice(0, i))
+        .concat("ay");
+    }
+  }
+  // Don't have any vowel
+  return str;
+}
+
+console.log(translatePigLatin("consonant"));
+console.log(translatePigLatin("glove"));
+console.log(translatePigLatin("airline"));
+console.log(translatePigLatin("rhythm"));
+
+// ****************************************************************************
+// Spinal Tap Case
+// ****************************************************************************
+function spinalCase(str) {
+  return str
+    .split(/\s|_|(?=[A-Z])/)
+    .join("-")
+    .toLowerCase();
+}
+
+console.log(spinalCase("This Is Spinal Tap"));
+console.log(spinalCase("thisIsSpinalTap"));
+console.log(spinalCase("The_Andy_Griffith_Show"));
+console.log(spinalCase("Teletubbies say Eh-oh"));
+console.log(spinalCase("AllThe-small Things"));
+
 // ****************************************************************************
 // Wherefore art thou
 // ****************************************************************************
-/*
+function whatIsInAName(collection, source) {
+  const srcKeys = Object.keys(source);
+  return collection.filter((obj) => {
+    for (let i = 0; i < srcKeys.length; i++) {
+      if (!obj.hasOwnProperty(srcKeys[i]) || obj[srcKeys[i]] !== source[srcKeys[i]]) {
+        return false;
+      }
+    }
+    return true;
+  });
+}
+console.log(
+  whatIsInAName(
+    [
+      { first: "Romeo", last: "Montague" },
+      { first: "Mercutio", last: null },
+      { first: "Tybalt", last: "Capulet" },
+    ],
+    { last: "Capulet" }
+  )
+);
 
 // ****************************************************************************
 // Seek and Destroy
