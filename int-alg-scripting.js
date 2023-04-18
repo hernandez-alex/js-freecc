@@ -1,5 +1,31 @@
 "use strict";
+// ****************************************************************************
+// Missing letters
+// ****************************************************************************
+function fearNotLetter(str) {
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+  if (str === letters) return undefined;
+  for (let i = 0; i < str.length; i++) {
+    console.log(i, str[i]);
+  }
+}
+
+console.log(fearNotLetter("abce"));
+console.log("---");
+console.log(fearNotLetter("abcdefghijklmnopqrstuvwxyz"));
 /*
+// ****************************************************************************
+// DNA Pairing
+// ****************************************************************************
+// AT CG
+function pairElement(str) {
+  return str.split("").map((el) => {
+    return el === "A" ? ["A", "T"] : el === "T" ? ["T", "A"] : el === "C" ? ["C", "G"] : ["G", "C"];
+  });
+}
+
+console.log(pairElement("GCG"));
+
 // ****************************************************************************
 // Search and Replace
 // ****************************************************************************
