@@ -1,9 +1,58 @@
 "use strict";
 // ****************************************************************************
-// Arguments Optional
+// Map the Debris
 // ****************************************************************************
+function orbitalPeriod(arr) {
+  const GM = 398600.4418;
+  const earthRadius = 6367.4447;
+  return arr.map((obj) => {
+    const orbP = 2 * Math.PI * Math.sqrt((obj.avgAlt + earthRadius) ** 3 / GM);
+    return { name: obj.name, orbitalPeriod: Math.round(orbP) };
+  });
+}
+
+console.log(orbitalPeriod([{ name: "sputnik", avgAlt: 35873.5553 }]));
+console.log(
+  orbitalPeriod([
+    { name: "iss", avgAlt: 413.6 },
+    { name: "hubble", avgAlt: 556.7 },
+    { name: "moon", avgAlt: 378632.553 },
+  ])
+);
 
 /*
+// ****************************************************************************
+// Make a Person
+// ****************************************************************************
+const Person = function (firstAndLast) {
+  let firstN, lastN;
+  [firstN, lastN] = firstAndLast.split(" ");
+  // Only change code below this line
+  this.getFirstName = function () {
+    return firstN;
+  };
+  this.getLastName = function () {
+    return lastN;
+  };
+  this.getFullName = function () {
+    return firstN.concat(" ").concat(lastN);
+  };
+  this.setFirstName = function (first) {
+    firstN = first;
+  };
+  this.setLastName = function (last) {
+    lastN = last;
+  };
+  this.setFullName = function (firstAndLast) {
+    [firstN, lastN] = firstAndLast.split(" ");
+  };
+  // Complete the method below and implement the others similarly
+  return firstN.concat(" ").concat(lastN);
+};
+
+const bob = new Person("Bob Ross");
+bob.getFullName();
+
 // ****************************************************************************
 // Arguments Optional
 // ****************************************************************************
