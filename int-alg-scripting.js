@@ -1,5 +1,103 @@
 "use strict";
 // ****************************************************************************
+// Arguments Optional
+// ****************************************************************************
+
+/*
+// ****************************************************************************
+// Arguments Optional
+// ****************************************************************************
+function addTogether(...parameters) {
+  const [num1, num2] = parameters;
+  if (parameters.length === 1 && typeof num1 === "number") {
+    return (value) => {
+      if (typeof value === "number") {
+        return num1 + value;
+      }
+    };
+  }
+  if (typeof num1 === "number" && typeof num2 === "number") {
+    return num1 + num2;
+  }
+}
+
+addTogether(2, 3);
+
+// ****************************************************************************
+// Everything Be True
+// ****************************************************************************
+function truthCheck(collection, pre) {
+  const falsyVals = [0, NaN, "", false, null, undefined];
+  for (let i = 0; i < collection.length; i++) {
+    if (falsyVals.includes(collection[i][pre])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+truthCheck(
+  [
+    { name: "Quincy", role: "Founder", isBot: false },
+    { name: "Naomi", role: "", isBot: false },
+    { name: "Camperbot", role: "Bot", isBot: true },
+  ],
+  "isBot"
+);
+
+// ****************************************************************************
+// Binary Agents
+// ****************************************************************************
+function binaryAgent(str) {
+  const decode = str
+    .split(" ")
+    .map((char) => String.fromCharCode(parseInt(char, 2)))
+    .join("");
+  return decode;
+}
+
+console.log(
+  binaryAgent(
+    "01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"
+  )
+);
+
+// ****************************************************************************
+// Steamroller
+// ****************************************************************************
+function steamrollArray(arr) {
+const newArr = [].concat(...arr);
+return newArr.some(Array.isArray)
+  ? steamrollArray(newArr)
+  : newArr
+}
+console.log(steamrollArray([1, [2], [3, [[4]]]]));
+console.log(steamrollArray([[["a"]], [["b"]]]));
+console.log(steamrollArray([1, [2], [3, [[4]]]]));
+console.log(steamrollArray([1, [], [3, [[4]]]]));
+console.log(steamrollArray([1, {}, [3, [[4]]]]));
+
+// ****************************************************************************
+// Drop it
+// ****************************************************************************
+function dropElements(arr, func) {
+  let limit;
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) {
+      limit = i;
+      break;
+    }
+  }
+  return limit === undefined ? [] : arr.slice(limit);
+}
+
+console.log(
+  dropElements([1, 2, 3, 4], function (n) {
+    return n >= 3;
+  })
+);
+
+// ****************************************************************************
 // Smallest Common Multiple
 // ****************************************************************************
 function prime(num) {
@@ -25,31 +123,31 @@ function smallestCommons(arr) {
   for (let i = 0; i < arrSort[1] - arrSort[0] + 1; i++) {
     numbers.push(i + arrSort[0]);
   }
-  console.log("--- numbers", numbers); // delete after
+  // console.log("--- numbers", numbers); // delete later
   const HighNumb = numbers[numbers.length - 1];
-  console.log("--- HighNumb", HighNumb); // delete after
+  // console.log("--- HighNumb", HighNumb); // delete later
   const divisors = primes(HighNumb);
-  console.log("--- divisors", divisors); // delete after
+  // console.log("--- divisors", divisors); // delete later
 
   //---
   let matrixMCM = [];
   for (let i = 0; i < numbers.length; i++) {
     let value = numbers[i];
-    // console.log("--- originalValue", value); // delete after
+    // console.log("--- originalValue", value); // delete later
     const rowMCM = [];
     for (let j = 0; j < divisors.length; j++) {
       let count = 0;
-      // console.log("div:", divisors[j]); // delete after
+      // console.log("div:", divisors[j]); // delete later
       while (value % divisors[j] === 0) {
         count++;
         value = value / divisors[j];
       }
       rowMCM.push(divisors[j] ** count);
     }
-    console.log("--- rowMCM", numbers[i], rowMCM); // delete after
+    // console.log("--- rowMCM", numbers[i], rowMCM); // delete later
     matrixMCM.push(rowMCM);
   }
-  console.log("--- MatrixMCM", matrixMCM); // delete after
+  // console.log("--- MatrixMCM", matrixMCM); // delete later
   let valMCM = 1;
   for (let i = 0; i < divisors.length; i++) {
     let maxRow = 1;
@@ -58,15 +156,14 @@ function smallestCommons(arr) {
     }
     valMCM = valMCM * maxRow;
   }
-  console.log(valMCM);
+  // console.log(valMCM); // delete later
   //---
 
-  return "*** Aquí va la solucion ***";
+  return valMCM;
 }
 
 console.log(smallestCommons([23, 18]));
 
-/*
 // ****************************************************************************
 // Sum All Primes
 // ****************************************************************************
