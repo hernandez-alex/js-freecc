@@ -1,4 +1,51 @@
 "use strict";
+// ****************************************************************************
+// Caja registradora
+// ****************************************************************************
+function checkCashRegister(price, cash, cid) {
+  const currency = {
+    PENNY: 0.01,
+    NICKEL: 0.05,
+    DIME: 0.1,
+    QUARTER: 0.25,
+    ONE: 1,
+    FIVE: 15,
+    TEN: 10,
+    TWENTY: 20,
+    "ONE HUNDRED": 100,
+  };
+  let change = [];
+  let changeReq = cash - price;
+  let changeAva = Math.round(100 * cid.reduce((sum, el) => sum + el[1], 0)) / 100;
+
+  console.log("----- Requerido", changeReq, "Disponible", changeAva);
+
+  if (changeAva < cash - price) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
+
+  for (let i = cid.length - 1; i >= 0; i--) {
+    // console.log("CR", changeReq);
+    // console.log("CID", cid[i][1]);
+    if (changeReq >= currency[cid[i][0]]) {
+      console.log(cid[i][0], "-", changeReq, ">=", currency[cid[i][0]]);
+    }
+  }
+  return change;
+}
+
+checkCashRegister(19.5, 20, [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100],
+]);
+
 /*
 // ****************************************************************************
 // Telephone Number Validator
