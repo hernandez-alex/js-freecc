@@ -3,6 +3,10 @@
 // Caja registradora
 // ****************************************************************************
 function checkCashRegister(price, cash, cid) {
+  const round2Dec = (num) => {
+    return Math.round(num * 100) / 100;
+  };
+
   const currency = {
     PENNY: 0.01,
     NICKEL: 0.05,
@@ -15,36 +19,63 @@ function checkCashRegister(price, cash, cid) {
     "ONE HUNDRED": 100,
   };
   let change = [];
-  let changeReq = cash - price;
-  let changeAva = Math.round(100 * cid.reduce((sum, el) => sum + el[1], 0)) / 100;
-
-  console.log("----- Requerido", changeReq, "Disponible", changeAva);
+  let changeReq = round2Dec(cash - price);
+  let changeAva = round2Dec(cid.reduce((sum, el) => sum + el[1], 0));
 
   if (changeAva < cash - price) {
     return { status: "INSUFFICIENT_FUNDS", change: [] };
   }
 
+  if (changeAva === cash - price) {
+    return { status: "CLOSED", change: cid };
+  }
+
   for (let i = cid.length - 1; i >= 0; i--) {
-    // console.log("CR", changeReq);
-    // console.log("CID", cid[i][1]);
-    if (changeReq >= currency[cid[i][0]]) {
-      console.log(cid[i][0], "-", changeReq, ">=", currency[cid[i][0]]);
+    let cidItNam = cid[i][0];
+    let cidItDis = cid[i][1];
+    let curVal = currency[cidItNam];
+
+    if (changeReq >= curVal) {
+      let pushing = changeReq > cidItDis ? cidItDis : round2Dec(changeReq - (changeReq % curVal));
+      change.push([cidItNam, pushing]);
+      changeReq = round2Dec(changeReq - pushing);
     }
   }
-  return change;
+
+  if (changeReq === 0) {
+    return { status: "OPEN", change: change };
+  } else {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
 }
 
-checkCashRegister(19.5, 20, [
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
-  ["ONE HUNDRED", 100],
-]);
+console.log(
+  checkCashRegister(5.6, 20, [
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90],
+    ["FIVE", 55],
+    ["TEN", 20],
+    ["TWENTY", 60],
+    ["ONE HUNDRED", 100],
+  ])
+);
+
+console.log(
+  checkCashRegister(19.5, 20, [
+    ["PENNY", 0.01],
+    ["NICKEL", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 1],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0],
+  ])
+);
 
 /*
 // ****************************************************************************
